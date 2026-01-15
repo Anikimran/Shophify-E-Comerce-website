@@ -1,3 +1,5 @@
+import { bannerImageOne } from "../../public/logo";
+
 export const navigation = [
   {
     tittle: "home",
@@ -28,3 +30,12 @@ export const navigation = [
     href: "/products",
   },
 ];
+export const banner = {
+  priceText: "Starting at $999.90",
+  title: "The best tablet Collection 2026",
+  textOne: "Exclusive offer",
+  offerPrice: "-30%",
+  textTwo: "Off this week",
+  buttonLink: "/products",
+  image: bannerImageOne,
+};
