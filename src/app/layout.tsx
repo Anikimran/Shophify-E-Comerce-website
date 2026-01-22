@@ -4,6 +4,8 @@ import "./globals.css";
 import { Montserrat, Inter } from "next/font/google";
 import Header from "@/components/header/Header";
 import Footer from "@/components/header/Footer";
+import Layout from "@/components/Layout";
+import Providers from "@/components/header/Providers";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -29,9 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${inter.variable}`}>
-        <Header />
-        {children}
-        <Footer />
+        <Layout>
+          <Header />
+          {children}
+          <Footer />
+          <Providers />
+        </Layout>
       </body>
     </html>
   );

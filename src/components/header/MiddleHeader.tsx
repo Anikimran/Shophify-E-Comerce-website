@@ -16,7 +16,7 @@ const MiddleHeader = () => {
           {" "}
           <div className="flex gap-1 items-center">
             <Image src={logo} alt="logo" width={40} height={40} />
-            <h1 className="text-2xl font-bold ">Shopify</h1>
+            <h1 className="text-2xl font-bold text-blue-400 ">Shopify</h1>
           </div>
         </Link>
         <div>

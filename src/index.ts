@@ -8,7 +8,15 @@ export interface productType {
   discountPercentage: number;
   rating: number;
   stock: number;
+  quantity?: number;
 }
 export type props = {
   item: productType;
 };
+export interface stateType {
+  shopy: {
+    cart: productType[];
+    favorite: productType[];
+    userInfo: any;
+  };
+}
