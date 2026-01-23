@@ -1,10 +1,9 @@
 import { getData } from "@/helpers";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import SideBar from "./SideBar";
-
 import AddToCardButton from "./AddToCardButton";
+import ProductPrice from "./ProductPrice"; // Optional
 
 type productType = {
   id: number;
@@ -15,6 +14,7 @@ type productType = {
   images: string[];
   discountPercentage: number;
 };
+
 const ProductList = async () => {
   const point = "https://dummyjson.com/products";
   const product = await getData(point);
@@ -24,7 +24,7 @@ const ProductList = async () => {
       {product?.products?.map((item: productType) => (
         <div
           key={item.id}
-          className="border rounded-lg p-2 flex flex-col  shadow-lg relative"
+          className="border rounded-lg p-2 flex flex-col shadow-lg relative"
         >
           <Link href={`/product/${item.id}`}>
             <Image
@@ -40,14 +40,20 @@ const ProductList = async () => {
             </p>
           </Link>
 
+          {/* Sidebar: if per product */}
           <SideBar />
-          <div className="border-t border-t-bg-gray-200 py-2 px-4 flex flex-col h-40 justify-between mt-5">
+
+          <div className="border-t border-t-gray-200 py-2 px-4 flex flex-col h-40 justify-between mt-5">
             <div>
-              <p className="text-sm font-medium capitalize ">{item.category}</p>
-              <h1 className="mt-2 font-semibold ">{item.title}</h1>
+              <p className="text-sm font-medium capitalize">{item.category}</p>
+              <h1 className="mt-2 font-semibold">{item.title}</h1>
+
+              {/* Price component */}
+              <ProductPrice item={item} />
             </div>
           </div>
-          <AddToCardButton product={product} />
+
+          <AddToCardButton product={item} />
         </div>
       ))}
     </div>

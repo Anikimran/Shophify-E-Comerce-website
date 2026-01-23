@@ -7,13 +7,14 @@ import { navigation } from "@/constance";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SocialLink from "./SocialLink";
+import Container from "./Container";
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const parthname = usePathname();
 
   return (
-    <>
+    <Container>
       <div
         onClick={() => setIsOpen(true)}
         className="text-2xl md:hidden cursor-pointer p-2 rounded hover:bg-gray-200"
@@ -37,7 +38,7 @@ const MobileNavigation = () => {
           "
         >
           <div className="space-y-3 capitalize ">
-            <div className="flex items-center justify-between gap-40 p-2">
+            <div className="flex items-center justify-between gap-10 p-2">
               <Link
                 onClick={() => setIsOpen(false)}
                 href="/"
@@ -66,7 +67,7 @@ const MobileNavigation = () => {
           </div>
         </DialogPanel>
       </Dialog>
-    </>
+    </Container>
   );
 };
 

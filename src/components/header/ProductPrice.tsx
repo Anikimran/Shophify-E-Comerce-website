@@ -1,17 +1,39 @@
-import { props } from "@/index";
+"use client";
+import { productType, props, stateType } from "@/index";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const ProductPrice = ({ item }: props) => {
-  const price = item.price;
+  const { cart } = useSelector((state: stateType) => state.shopy);
 
+  const [existingProduct, setExistingProduct] = useState<productType | null>(
+    null,
+  );
+
+  // Check if product exists in cart
+  useEffect(() => {
+    const availableProduct = cart.find((cartItem) => cartItem.id === item.id);
+    setExistingProduct(availableProduct ?? null);
+  }, [cart, item.id]);
+
+  const price = item.price;
   const discountPrice = price - (price * item.discountPercentage) / 100;
 
-  const formattedOriginalPrice = price.toLocaleString("en-US", {
+  // Quantity in cart
+  const quantity = existingProduct?.quantity ?? 1;
+
+  // Total prices
+  const totalPrice = price * quantity;
+  const totalDiscountPrice = discountPrice * quantity;
+
+  // Format prices
+  const formattedOriginalPrice = totalPrice.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
   });
 
-  const formattedDiscountPrice = discountPrice.toLocaleString("en-US", {
+  const formattedDiscountPrice = totalDiscountPrice.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
@@ -28,6 +50,8 @@ const ProductPrice = ({ item }: props) => {
       <p className="text-lg font-semibold text-red-500">
         {formattedDiscountPrice}
       </p>
+
+      {/* Quantity */}
     </div>
   );
 };
